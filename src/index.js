@@ -10,16 +10,31 @@ var createClass = require('create-react-class');
 //   );
 // };
 var Component = createClass({
-  render: function() {
+  getInitialState: function () {
+    return {
+      color: 'blue'
+    };
+  },
+  handleButtonClick: function () {
+    this.setState(function (prevState) {
+      return {
+        color: (prevState.color === 'blue') ? 'green' : 'blue'
+      };
+    });
+  },
+  render: function () {
     return (
-      <div style={{color: props.color}}>
-        <h1>{this.props.greeting}</h1>
+      <div>
+        <div style={{color: this.state.color}}>
+          <h1>{this.props.greeting}</h1>
+        </div>
+        <button onClick={this.handleButtonClick}>ClickMe</button>
       </div>
     );
   }
 });
 
 ReactDOM.render(
-  <Component greeting="Hello world" color="green" />,
+  <Component greeting="Hello world"/>,
   document.getElementById('root')
 );
